@@ -50,22 +50,15 @@ func getPart1Output(numList []int64, inputValue int64) int64 {
 	currPos := 0
 	stringNum := getInstructions(numList[currPos])
 	stringNumLen := len(stringNum)
-	numInstructions := 4
 	currOpCode, opCodeErr := strconv.ParseInt(stringNum[stringNumLen-2:], 10, 64)
 	tempNumList := make([]int64, len(numList))
 	output := int64(0)
 	copy(tempNumList, numList)
 
 	for currOpCode != 99 {
-		numInstructions = 4
 		if(currOpCode == 1) {
-			inputParam := int64(currPos+3)
 			param1 := tempNumList[currPos+1]
 			param2 := tempNumList[currPos+2]
-			
-			if stringNum[0:1] == "0" {
-				inputParam = tempNumList[currPos+3]	
-			}
 
 			if stringNum[2:3] == "0" {
 				param1 = tempNumList[tempNumList[currPos+1]]
@@ -75,18 +68,13 @@ func getPart1Output(numList []int64, inputValue int64) int64 {
 				param2 = tempNumList[tempNumList[currPos+2]]
 			}
 
-			tempNumList[inputParam] = param1 + param2
+			tempNumList[tempNumList[currPos+3]] = param1 + param2
+			currPos += 4
 		}
 
 		if(currOpCode == 2) {
-			inputParam := int64(currPos+3)
 			param1 := tempNumList[currPos+1]
 			param2 := tempNumList[currPos+2]
-			
-
-			if stringNum[0:1] == "0" {
-				inputParam = tempNumList[currPos+3]	
-			}
 
 			if stringNum[2:3] == "0" {
 				param1 = tempNumList[tempNumList[currPos+1]]
@@ -96,34 +84,21 @@ func getPart1Output(numList []int64, inputValue int64) int64 {
 				param2 = tempNumList[tempNumList[currPos+2]]
 			}
 
-			tempNumList[inputParam] = param1 * param2
+			tempNumList[tempNumList[currPos+3]] = param1 * param2
+			currPos += 4
 		}
 
 		if(currOpCode == 3) {
-			inputParam := int64(currPos +1)
-			
-			if stringNum[2:3] == "0" {
-				inputParam = tempNumList[currPos+1]
-			}
-
-			numInstructions = 2
-			tempNumList[inputParam] = inputValue
+			tempNumList[tempNumList[currPos+1]] = inputValue
+			currPos += 2
 		}
 
 		if(currOpCode == 4) {
-			inputParam := int64(currPos +1)
-			
-			if stringNum[2:3] == "0" {
-				inputParam = tempNumList[currPos+1]
-			}
-
-			numInstructions = 2
-			output = tempNumList[inputParam] 
+			output = tempNumList[tempNumList[currPos+1]] 
+			currPos += 2
 		}
 
-		currPos += numInstructions
 		stringNum = getInstructions(tempNumList[currPos])
-		numInstructions = len(strconv.Itoa(int(tempNumList[currPos])))
 		stringNumLen = len(stringNum)
 		currOpCode, opCodeErr = strconv.ParseInt(stringNum[stringNumLen-2:], 10, 64)
 	}
