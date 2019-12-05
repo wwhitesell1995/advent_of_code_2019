@@ -40,7 +40,7 @@ func getWires(wireList []string) map[int]map[int]bool {
 	for _, val := range wireList {
 		runes := []rune(val)
 		direction := string(runes[0])
-		numIter, numErr := strconv.ParseInt(string(runes[1:]), 10, 32)
+		numIterc := strconv.ParseInt(string(runes[1:]), 10, 32)
 		if numErr != nil {
 			fmt.Println("Error converting to int")
 			break;
