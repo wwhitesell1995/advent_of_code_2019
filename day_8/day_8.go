@@ -53,7 +53,9 @@ func getPart1Output(width int, height int) {
 
 	layerOutput := layers[minZeroLayer]["1"] * layers[minZeroLayer]["2"]
 
+	fmt.Println("Day 8 Part 1 Ouput")
 	fmt.Println(layerOutput)
+	fmt.Println()
 }
 
 func getPart2Output(width int, height int) {
@@ -88,7 +90,9 @@ func getPart2Output(width int, height int) {
 		}
 	}
 
+	fmt.Println("Day 8 Part 2 Ouput")
 	for i:=0; i < height; i++ {
 		fmt.Println(resultLayer[25*i:25*(i+1)])
 	}
+	fmt.Println()
 }
