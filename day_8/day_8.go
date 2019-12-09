@@ -80,14 +80,12 @@ func getPart2Output(width int, height int) {
 			resultLayer[position] = string(r)
 		}
 
-		position += 1
-	}
-
-	// This was done to make the output a bit more readable
-	for i, _ := range resultLayer {
-		if resultLayer[i] == "0" {
-			resultLayer[i] = " "
+	    // This was done to make the output a bit more readable
+		if resultLayer[position] == "0" {
+			resultLayer[position] = " "
 		}
+
+		position += 1
 	}
 
 	fmt.Println("Day 8 Part 2 Ouput")
